@@ -1,3 +1,3 @@
 # architecture-future_pro_2_0
 
-Placeholder main branch. Sprint 11 deliverables are prepared in the pull request branch.
+Проектная работа 11 спринта по архитектуре компании «Будущее 2.0».
