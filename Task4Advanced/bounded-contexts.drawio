@@ -1,0 +1,193 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="future-2-0-bounded-contexts" name="Bounded Context Map">
+    <mxGraphModel dx="1437" dy="731" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontStyle=1;fontColor=#17202a;" value="Будущее 2.0 - bounded context map&#xa;Data Mesh domains, events, data products and migration bridges" vertex="1">
+          <mxGeometry height="70" width="1200" x="1320" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=12;" value="solid arrows: domain event / contract" vertex="1">
+          <mxGeometry height="50" width="280" x="940" y="201" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;fontSize=12;" value="green arrows: governed data product / lineage" vertex="1">
+          <mxGeometry height="50" width="280" x="940" y="266" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ef6c00;fontSize=12;" value="dashed arrows: temporary CDC / anti-corruption bridge" vertex="1">
+          <mxGeometry height="55" width="280" x="940" y="331" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-5" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=15;fontStyle=1;" value="Core business bounded contexts" vertex="1">
+          <mxGeometry height="590" width="700" x="1260" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-6" parent="riiRzZ4pKW0nMDnMvEH8-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=13;fontStyle=1;" value="Clinic Operations / Patient Flow&#xa;Owner: Clinics Domain Owner&#xa;Events: AppointmentScheduled, VisitCompleted&#xa;Data product: PatientFlowMart" vertex="1">
+          <mxGeometry height="115" width="290" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-7" parent="riiRzZ4pKW0nMDnMvEH8-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=13;fontStyle=1;" value="Fintech / Banking&#xa;Owner: Fintech Domain Owner&#xa;Events: InvoiceIssued, PaymentReceived, CreditApproved&#xa;Data products: FinancialCalculationsMart, CreditRiskMart" vertex="1">
+          <mxGeometry height="115" width="290" x="370" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-8" parent="riiRzZ4pKW0nMDnMvEH8-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=13;fontStyle=1;" value="AI Medical Services&#xa;Owner: AI Domain Owner&#xa;Event: AIInferenceCompleted&#xa;Data product: AIServiceKpiMart" vertex="1">
+          <mxGeometry height="105" width="290" x="40" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-9" parent="riiRzZ4pKW0nMDnMvEH8-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=13;" value="Head Office&#xa;Owner: Corporate Data Owner&#xa;Events: InventoryAdjusted, StaffingChanged&#xa;Data products: InventoryKpiMart, corporate KPI products" vertex="1">
+          <mxGeometry height="105" width="290" x="370" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-10" parent="riiRzZ4pKW0nMDnMvEH8-5" style="swimlane;html=1;startSize=28;rounded=1;whiteSpace=wrap;dashed=1;dashPattern=8 4;fillColor=#ffebee;strokeColor=#b71c1c;fontSize=14;fontStyle=1;" value="Regulated operational boundary" vertex="1">
+          <mxGeometry height="160" width="620" x="40" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-11" parent="riiRzZ4pKW0nMDnMvEH8-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#b71c1c;fontSize=12;fontStyle=1;" value="Protected Medical Records&#xa;Owner: Medical Data Owner + CISO/DPO&#xa;медицинские карты, истории болезней, результаты медицинских исследований&#xa;не публикуются как self-service analytics data product" vertex="1">
+          <mxGeometry height="85" width="550" x="35" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-12" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#f3e5f5;strokeColor=#6a1b9a;fontSize=15;fontStyle=1;" value="Future partner bounded contexts" vertex="1">
+          <mxGeometry height="280" width="700" x="1260" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-13" parent="riiRzZ4pKW0nMDnMvEH8-12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#6a1b9a;fontSize=13;fontStyle=1;" value="Pharma Partners&#xa;Owner: Partner Integration Owner&#xa;Events: PartnerDataReceived, PartnerContractUpdated&#xa;Data product: PharmaPartnerMart" vertex="1">
+          <mxGeometry height="110" width="290" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-14" parent="riiRzZ4pKW0nMDnMvEH8-12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#6a1b9a;fontSize=13;fontStyle=1;" value="Medical Device / Electronics&#xa;Owner: Device Domain Owner&#xa;Events: DeviceTelemetryReceived, DeviceMaintenanceRequired&#xa;Data product: DeviceTelemetryMart" vertex="1">
+          <mxGeometry height="110" width="290" x="370" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-15" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#e0f2f1;strokeColor=#00695c;fontSize=15;fontStyle=1;" value="Data platform and governance" vertex="1">
+          <mxGeometry height="590" width="660" x="2050" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-16" parent="riiRzZ4pKW0nMDnMvEH8-15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b2dfdb;strokeColor=#00695c;fontSize=13;fontStyle=1;" value="Event platform&#xa;Kafka-compatible streams, Schema Registry, DLQ&#xa;domain event contracts" vertex="1">
+          <mxGeometry height="100" width="265" x="45" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-17" parent="riiRzZ4pKW0nMDnMvEH8-15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b2dfdb;strokeColor=#00695c;fontSize=13;fontStyle=1;" value="Data Platform / DataHub&#xa;catalog, owners, glossary, lineage, access workflow&#xa;contract and data product metadata" vertex="1">
+          <mxGeometry height="100" width="265" x="350" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-18" parent="riiRzZ4pKW0nMDnMvEH8-15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b2dfdb;strokeColor=#00695c;fontSize=13;" value="Data Lakehouse&#xa;Object Storage, Iceberg, Nessie, Dremio&#xa;approved read models and data products" vertex="1">
+          <mxGeometry height="100" width="265" x="45" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-19" parent="riiRzZ4pKW0nMDnMvEH8-15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b2dfdb;strokeColor=#00695c;fontSize=12;fontStyle=1;" value="Governed access&#xa;RBAC, sensitivity tags, approvals, audit&#xa;медицинские карты / истории болезней / результаты медицинских исследований исключены из analytics" vertex="1">
+          <mxGeometry height="100" width="265" x="350" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-20" parent="riiRzZ4pKW0nMDnMvEH8-15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b2dfdb;strokeColor=#00695c;fontSize=13;fontStyle=1;" value="Data products marketplace&#xa;PatientFlowMart, FinancialCalculationsMart, CreditRiskMart, InventoryKpiMart, AIServiceKpiMart" vertex="1">
+          <mxGeometry height="105" width="570" x="45" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-21" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#fbe9e7;strokeColor=#bf360c;fontSize=15;fontStyle=1;" value="Legacy migration bounded contexts" vertex="1">
+          <mxGeometry height="280" width="660" x="2050" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-22" parent="riiRzZ4pKW0nMDnMvEH8-21" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffccbc;strokeColor=#bf360c;fontSize=13;fontStyle=1;" value="Legacy DWH&#xa;SQL Server 2008, historical logic, CDC source&#xa;migration bridge only" vertex="1">
+          <mxGeometry height="105" width="265" x="45" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-23" parent="riiRzZ4pKW0nMDnMvEH8-21" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffccbc;strokeColor=#bf360c;fontSize=13;fontStyle=1;" value="Legacy Camel&#xa;old ESB messages&#xa;translated by anti-corruption layer" vertex="1">
+          <mxGeometry height="105" width="265" x="350" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-24" parent="riiRzZ4pKW0nMDnMvEH8-21" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ef6c00;fontSize=13;fontStyle=1;" value="Anti-corruption layer&#xa;legacy mapping, sensitivity classification, lineage, DLQ routing, decommission date" vertex="1">
+          <mxGeometry height="60" width="300" x="180" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-25" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#1565c0;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-26" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#1565c0;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-27" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b71c1c;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1445" y="610" />
+              <mxPoint x="1445" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-28" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#1565c0;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2050" y="310" />
+              <mxPoint x="2050" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-29" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#1565c0;fontSize=12;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1540" y="420" />
+              <mxPoint x="2120" y="420" />
+              <mxPoint x="2120" y="380" />
+            </Array>
+            <mxPoint x="2120" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-30" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2e7d32;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1775" y="571" />
+              <mxPoint x="2095" y="571" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-31" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2e7d32;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1445" y="260" />
+              <mxPoint x="2380" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-32" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#00695c;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-33" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#00695c;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-19" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-34" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#00695c;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2310" y="580" />
+              <mxPoint x="2310" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-35" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6a1b9a;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2020" y="976" />
+              <mxPoint x="2020" y="331" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-36" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2e7d32;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1445" y="1060" />
+              <mxPoint x="2040" y="1060" />
+              <mxPoint x="2040" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-37" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-22" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#ef6c00;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-24" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2227" y="1030" />
+              <mxPoint x="2380" y="1030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-38" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#ef6c00;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-24" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2533" y="1030" />
+              <mxPoint x="2380" y="1030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-39" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#ef6c00;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2070" y="1081" />
+              <mxPoint x="2070" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="riiRzZ4pKW0nMDnMvEH8-40" edge="1" parent="1" source="riiRzZ4pKW0nMDnMvEH8-24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#ef6c00;fontSize=12;" target="riiRzZ4pKW0nMDnMvEH8-17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2690" y="1081" />
+              <mxPoint x="2690" y="331" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
