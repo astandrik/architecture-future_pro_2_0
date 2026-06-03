@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="future-2-0-task3-c4" name="C4 Target Architecture">
-    <mxGraphModel dx="1868" dy="1850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1437" dy="1631" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -28,8 +28,11 @@
         <mxCell id="camel" parent="legacy_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffccbc;strokeColor=#bf360c;fontSize=13;fontStyle=1;" value="Apache Camel ESB&#xa;Old bus, bridge only during migration" vertex="1">
           <mxGeometry height="80" width="240" x="40" y="355" as="geometry" />
         </mxCell>
-        <mxCell id="acl" parent="legacy_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ef6c00;fontSize=13;fontStyle=1;" value="Anti-corruption layer&#xa;Translates DWH/Camel contracts and blocks new direct coupling" vertex="1">
-          <mxGeometry height="70" width="240" x="40" y="475" as="geometry" />
+        <mxCell id="acl" parent="legacy_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ef6c00;fontSize=13;fontStyle=1;" value="Anti-corruption layer&#xa;DWH/Camel на время migration&#xa;translation/mapping, contract isolation" vertex="1">
+          <mxGeometry height="80" width="240" x="40" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="e_legacy_clients_dwh" edge="1" parent="legacy_zone" source="legacy_clients" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;strokeColor=#bf360c;fontSize=11;" target="dwh" value="legacy reads/reports during migration">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="domain_zone" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=15;fontStyle=1;" value="Business domains - Data Mesh ownership" vertex="1">
           <mxGeometry height="560" width="420" x="770" y="120" as="geometry" />
@@ -43,19 +46,19 @@
         <mxCell id="medical_boundary" parent="domain_zone" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#ffebee;strokeColor=#b71c1c;fontSize=12;fontStyle=1;" value="Excluded Medical Data Boundary&#xa;Медицинские карты, истории болезней и результаты медицинских исследований не входят в self-service analytics" vertex="1">
           <mxGeometry height="105" width="340" x="40" y="355" as="geometry" />
         </mxCell>
-        <mxCell id="domain_note" parent="domain_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4ff;strokeColor=#1565c0;fontSize=12;" value="Domains publish events and governed data products instead of adding business logic to DWH" vertex="1">
-          <mxGeometry height="50" width="340" x="40" y="490" as="geometry" />
+        <mxCell id="domain_note" parent="domain_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4ff;strokeColor=#1565c0;fontSize=12;" value="Бизнес-логика: domain services, bounded contexts, aggregates&#xa;integration logic: events/API contracts" vertex="1">
+          <mxGeometry height="65" width="340" x="40" y="480" as="geometry" />
         </mxCell>
         <mxCell id="event_zone" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#ede7f6;strokeColor=#4527a0;fontSize=15;fontStyle=1;" value="Event and ingestion platform" vertex="1">
           <mxGeometry height="560" width="330" x="1260" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="streaming" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="Kafka-compatible Event Streaming&#xa;Domain events and reactive flows" vertex="1">
+        <mxCell id="streaming" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="Kafka-compatible Event Streaming&#xa;маршрутизация/retry для domain events&#xa;и reactive flows" vertex="1">
           <mxGeometry height="90" width="250" x="40" y="75" as="geometry" />
         </mxCell>
-        <mxCell id="schema_dlq" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="Schema Registry + DLQ&#xa;Compatibility checks, rejected messages and replay" vertex="1">
+        <mxCell id="schema_dlq" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="Schema Registry + DLQ&#xa;ФЛК / compatibility checks&#xa;retry, DLQ/replay reliability patterns" vertex="1">
           <mxGeometry height="95" width="250" x="40" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="ingestion" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="CDC / Stream ingestion / ELT&#xa;DWH changes, domain streams, partner feeds and backfills" vertex="1">
+        <mxCell id="ingestion" parent="event_zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=13;fontStyle=1;" value="CDC / Stream ingestion / ELT&#xa;трансформации, mapping и data-flow&#xa;orchestration; partner backfills" vertex="1">
           <mxGeometry height="100" width="250" x="40" y="375" as="geometry" />
         </mxCell>
         <mxCell id="lakehouse_zone" parent="1" style="swimlane;html=1;startSize=34;rounded=1;whiteSpace=wrap;fillColor=#e0f2f1;strokeColor=#00695c;fontSize=15;fontStyle=1;" value="Yandex Cloud Data Lakehouse and self-service platform" vertex="1">
@@ -91,7 +94,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e_teams_domains" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2e7d32;fontSize=12;entryX=0;entryY=0.5;" target="domain_note" value="">
+        <mxCell id="e_teams_domains" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2e7d32;fontSize=12;" target="domain_note" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="750" y="780" />

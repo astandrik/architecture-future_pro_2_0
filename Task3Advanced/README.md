@@ -48,6 +48,22 @@ UI — PowerBuilder, BI — Power BI, интеграции — Apache Camel.
 
 Nessie catalog и Airflow/ELT относятся к реализации Data Lakehouse, но не вынесены отдельными элементами уровня C4 Container.
 
+## Куда переезжают обязанности ESB
+
+Apache Camel не переносится как новая центральная шина. Его обязанности разделяются между доменами, event platform, ingestion/ELT и временным anti-corruption layer, чтобы не восстановить прежнюю зависимость от общего integration hub.
+
+Ниже зафиксировано целевое владение для функций ESB: маршрутизация, трансформации, ФЛК, retry, DLQ, оркестрация, интеграционная логика и бизнес-логика.
+
+| Обязанность ESB | Целевой владелец | Что остаётся в переходном контуре |
+|---|---|---|
+| Маршрутизация | Kafka-compatible event platform маршрутизирует асинхронные domain events. Синхронные команды и lookups оформляются как domain APIs/API contracts, а не как новые связи через DWH или Camel. | ACL поддерживает маршруты только для legacy-потоков до вывода Camel. |
+| Трансформации | Целевые data transformations выполняются в CDC / Stream ingestion / ELT и доменных data-product pipelines. | Migration mapping для старых форматов остаётся в anti-corruption layer. |
+| Форматно-логический контроль (ФЛК) / contract validation | Schema Registry, compatibility checks, data quality gates, DataHub sensitivity/ownership policies. | ACL валидирует только старые контракты, пока legacy-потребители не отключены. |
+| Retry / DLQ / replay / прочие reliability patterns | Стандарты Kafka-compatible event platform задают retry policy, DLQ ownership и replay policy. В сообщениях обязательны `event_id`/`message_id`, потребители обрабатывают повторы идемпотентно, для DLQ ведутся monitoring и runbook. Владелец домена-источника исправляет payload, SRE Lead и Event Platform Lead отвечают за эксплуатационные SLO. | Это reliability-механики, а не новая бизнес-логика в центральной шине. Для старых интеграций они применяются только как bridge-поведение до вывода legacy flow. |
+| Оркестрация | Workflow/ELT orchestration, например Airflow и доменные workflows. | Переходные batch/backfill сценарии исполняются рядом с ingestion, без переноса бизнес-логики в центральную шину. |
+| Интеграционная логика | Event contracts, API contracts и доменное владение интеграциями. | ACL используется только на период миграции для изоляции DWH/Camel contracts. |
+| Бизнес-логика | Domain services, bounded contexts и aggregates. | Не размещается в DWH, ESB или data platform; legacy-логика выносится по мере миграции доменов. |
+
 ## Ограничение по медицинским данным
 
 Медицинские карты, истории болезней и результаты медицинских исследований не публикуются в аналитику и остаются в regulated operational medical boundary.
