@@ -1,0 +1,2 @@
+include:
+  - local: "Task2Advanced/.gitlab-ci.yml"

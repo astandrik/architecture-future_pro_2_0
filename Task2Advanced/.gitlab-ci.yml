@@ -1,0 +1,88 @@
+image: hashicorp/terraform:1.11.4
+
+stages:
+  - fmt
+  - validate
+  - plan
+  - apply
+
+variables:
+  TF_ROOT: "Task2Advanced"
+  TF_ENV: "dev"
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  TF_PLUGIN_CACHE_DIR: "$CI_PROJECT_DIR/.terraform.d/plugin-cache"
+
+cache:
+  key: "terraform-${CI_COMMIT_REF_SLUG}"
+  paths:
+    - .terraform.d/plugin-cache
+
+before_script:
+  - mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
+.terraform_common:
+  before_script:
+    - mkdir -p "$TF_PLUGIN_CACHE_DIR"
+    - cd "$TF_ROOT"
+    - terraform version
+    - export TF_VAR_cloud_id="$YC_CLOUD_ID"
+    - export TF_VAR_folder_id="$YC_FOLDER_ID"
+    - export TF_VAR_environment="$TF_ENV"
+    - export TF_VAR_ssh_public_key="$SSH_PUBLIC_KEY"
+    - export AWS_ACCESS_KEY_ID="$YC_STORAGE_ACCESS_KEY"
+    - export AWS_SECRET_ACCESS_KEY="$YC_STORAGE_SECRET_KEY"
+    - export AWS_EC2_METADATA_DISABLED="true"
+    - export TF_STATE_KEY="task2/${TF_ENV}/terraform.tfstate"
+
+terraform_fmt:
+  stage: fmt
+  script:
+    - cd "$TF_ROOT"
+    - terraform fmt -check -recursive .
+
+terraform_validate_bootstrap:
+  stage: validate
+  script:
+    - cd "$TF_ROOT/bootstrap"
+    - terraform init -backend=false -input=false
+    - terraform validate
+
+terraform_validate:
+  stage: validate
+  extends: .terraform_common
+  script:
+    - terraform init -reconfigure -input=false -backend-config="bucket=${TF_STATE_BUCKET}" -backend-config="key=${TF_STATE_KEY}"
+    - terraform validate
+
+terraform_plan:
+  stage: plan
+  extends: .terraform_common
+  needs:
+    - terraform_validate
+  script:
+    - terraform init -reconfigure -input=false -backend-config="bucket=${TF_STATE_BUCKET}" -backend-config="key=${TF_STATE_KEY}"
+    - terraform plan -no-color -out=tfplan
+    - terraform show -no-color tfplan > tfplan.txt
+  artifacts:
+    name: "terraform-plan-${TF_ENV}-${CI_COMMIT_SHORT_SHA}"
+    expire_in: 1 hour
+    paths:
+      - Task2Advanced/tfplan
+      - Task2Advanced/tfplan.txt
+
+terraform_apply:
+  stage: apply
+  extends: .terraform_common
+  needs:
+    - job: terraform_plan
+      artifacts: true
+  resource_group: "terraform-${TF_ENV}"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+      allow_failure: false
+    - when: never
+  script:
+    - terraform init -reconfigure -input=false -backend-config="bucket=${TF_STATE_BUCKET}" -backend-config="key=${TF_STATE_KEY}"
+    - terraform apply -no-color -auto-approve tfplan
